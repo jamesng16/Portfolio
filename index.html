@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nguyen Viet Hoang — AI Engineer</title>
+<meta name="description" content="AI Engineer specializing in NLP, embeddings, and retrieval-augmented systems. Building agentic AI and multi-agent workflows.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<style>
+/* ═══════════════════════════════════════════════
+   PORTFOLIO — Dark Warm Atmospheric
+   Particle network background + real CV data
+   ═══════════════════════════════════════════════ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { overflow-x: clip; scroll-behavior: smooth; scroll-snap-type: y proximity; }
+body {
+  overflow-x: clip;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--color-ink);
+  background-color: var(--color-paper);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img, picture, video, canvas, svg { display: block; max-width: 100%; }
+input, button, textarea, select { font: inherit; }
+a { color: inherit; text-decoration: none; }
+
+/* ═══ Particle canvas background ═══════════════ */
+#particle-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.22;
+}
+
+/* ═══ Warm gradient overlay ════════════════════ */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 30%,
+    oklch(20% 0.02 40) 0%,
+    transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ═══ Layout container ═════════════════════════ */
+.wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 860px;
+  margin-inline: auto;
+  padding-inline: var(--page-gutter);
+}
+
+/* ═══ Hero — full viewport, centered ══════════ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-3xl) 0;
+  scroll-snap-align: start;
+}
+.hero .reveal-stagger {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+.hero__label {
+  font-family: var(--font-outlier);
+  font-size: var(--text-xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-lg);
+}
+.hero__display {
+  font-family: var(--font-name);
+  font-weight: 500;
+  font-size: var(--text-display);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-2xs);
+  overflow-wrap: anywhere;
+  min-width: 0;
+  max-width: 16ch;
+}
+.hero__sub {
+  font-family: var(--font-outlier);
+  font-size: var(--text-md);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-lg);
+}
+.hero__lede {
+  font-size: var(--text-md);
+  line-height: 1.55;
+  color: var(--color-neutral);
+}
+.hero__scroll {
+  position: absolute;
+  bottom: var(--space-xl);
+  font-family: var(--font-outlier);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+  opacity: 0.6;
+}
+
+/* ═══ Section ═════════════════════════════════ */
+.section {
+  padding: var(--space-3xl) 0;
+  text-align: center;
+  scroll-snap-align: start;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.section__label {
+  font-family: var(--font-outlier);
+  font-size: var(--text-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-md);
+}
+.section__title {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: var(--text-2xl);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-xl);
+}
+.section__body {
+  font-size: var(--text-md);
+  line-height: 1.65;
+  max-width: 55ch;
+  margin-inline: auto;
+  color: var(--color-neutral);
+}
+.section__body p + p { margin-top: var(--space-sm); }
+
+/* ═══ Skills grid ═════════════════════════════ */
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs) var(--space-md);
+  justify-content: center;
+  margin-top: var(--space-xl);
+}
+.skill-tag {
+  font-family: var(--font-outlier);
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  padding: var(--space-2xs) var(--space-sm);
+  border: var(--rule-hair) solid var(--color-rule);
+  white-space: nowrap;
+}
+
+/* ═══ Experience timeline ═════════════════════ */
+.timeline {
+  margin-top: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  text-align: left;
+}
+.timeline__item {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2xs);
+  padding: var(--space-md) 0;
+  border-bottom: var(--rule-hair) solid var(--color-rule);
+}
+.timeline__year {
+  font-family: var(--font-outlier);
+  font-size: var(--text-xs);
+  color: var(--color-accent);
+  letter-spacing: 0.04em;
+}
+.timeline__role {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--text-lg);
+  letter-spacing: -0.01em;
+}
+.timeline__company {
+  font-family: var(--font-outlier);
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+.timeline__desc {
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--color-neutral);
+  max-width: 55ch;
+}
+.timeline__highlights {
+  list-style: none;
+  padding: 0;
+  margin-top: var(--space-xs);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+}
+.timeline__highlights li {
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--color-neutral);
+  padding-left: var(--space-md);
+  position: relative;
+}
+.timeline__highlights li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--color-accent);
+}
+
+/* ═══ Projects ════════════════════════════════ */
+.projects {
+  margin-top: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  text-align: left;
+}
+.project {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2xs);
+  padding: var(--space-md) 0;
+  border-bottom: var(--rule-hair) solid var(--color-rule);
+}
+.project__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+.project__name {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--text-lg);
+  letter-spacing: -0.01em;
+}
+.project__year {
+  font-family: var(--font-outlier);
+  font-size: var(--text-xs);
+  color: var(--color-accent);
+  white-space: nowrap;
+}
+.project__desc {
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--color-neutral);
+  max-width: 55ch;
+}
+.project__stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs) var(--space-sm);
+  margin-top: var(--space-2xs);
+}
+.project__stack span {
+  font-family: var(--font-outlier);
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+}
+
+/* ═══ Awards ══════════════════════════════════ */
+.awards {
+  margin-top: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  text-align: left;
+}
+.award {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-md);
+  padding: var(--space-xs) 0;
+  border-bottom: var(--rule-hair) solid var(--color-rule);
+}
+.award__title {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--color-ink);
+  flex: 1;
+}
+.award__meta {
+  font-family: var(--font-outlier);
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+
+/* ═══ Education + Certs ══════════════════════ */
+.education {
+  margin-top: var(--space-xl);
+  text-align: left;
+}
+.education__item {
+  padding: var(--space-sm) 0;
+  border-bottom: var(--rule-hair) solid var(--color-rule);
+}
+.education__degree {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--text-md);
+  letter-spacing: -0.01em;
+}
+.education__school {
+  font-family: var(--font-outlier);
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  margin-top: var(--space-2xs);
+}
+.cert-list {
+  margin-top: var(--space-lg);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs) var(--space-sm);
+  justify-content: center;
+}
+.cert {
+  font-family: var(--font-outlier);
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+  padding: var(--space-2xs) var(--space-sm);
+  border: var(--rule-hair) solid var(--color-rule);
+  white-space: nowrap;
+}
+
+/* ═══ Contact / CV ═════════════════════════════ */
+.contact {
+  text-align: center;
+  padding: var(--space-3xl) 0;
+  scroll-snap-align: start;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.cv-download {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-family: var(--font-outlier);
+  font-size: var(--text-base);
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+  padding: var(--space-sm) var(--space-xl);
+  border: 0;
+  cursor: pointer;
+  white-space: nowrap;
+  min-height: 44px;
+  transition: background-color var(--dur-short) var(--ease-out),
+              transform var(--dur-micro) var(--ease-out);
+}
+.cv-download:hover { background: var(--color-ink); color: var(--color-paper); }
+.cv-download:active { transform: translateY(1px); }
+.cv-download:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+}
+.cv-download__arrow { font-size: 1.2em; }
+
+.contact__links {
+  display: flex;
+  gap: var(--space-lg);
+  margin-top: var(--space-xl);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.contact__link {
+  font-family: var(--font-outlier);
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  border-bottom: var(--rule-hair) solid var(--color-rule);
+  padding-bottom: 1px;
+  white-space: nowrap;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  transition: color var(--dur-short) var(--ease-out),
+              border-color var(--dur-short) var(--ease-out);
+}
+.contact__link:hover { border-bottom-color: var(--color-accent); color: var(--color-accent); }
+.contact__link:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+/* ═══ Ft5 Statement footer ════════════════════ */
+.foot {
+  text-align: center;
+  padding: var(--space-2xl) 0 var(--space-xl);
+  border-top: var(--rule-hair) solid var(--color-rule);
+  scroll-snap-align: start;
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.foot__sentence {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: var(--text-lg);
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  margin-bottom: var(--space-md);
+  color: var(--color-neutral);
+}
+.foot__meta {
+  font-family: var(--font-outlier);
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+  letter-spacing: 0.04em;
+}
+
+/* ═══ Reduced motion ═══════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal { opacity: 1 !important; transform: none !important; }
+  #particle-canvas { display: none; }
+}
+
+/* ═══ Scroll reveal animation ═════════════════ */
+.reveal {
+  opacity: 1;
+  transform: none;
+  transition: opacity var(--dur-long) var(--ease-out),
+              transform var(--dur-long) var(--ease-out);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+.reveal-stagger > * {
+  opacity: 1;
+  transform: none;
+  transition: opacity var(--dur-long) var(--ease-out),
+              transform var(--dur-long) var(--ease-out);
+}
+.reveal-stagger.is-visible > * {
+  opacity: 1;
+  transform: none;
+}
+.reveal-stagger.is-visible > *:nth-child(1) { transition-delay: 0ms; }
+.reveal-stagger.is-visible > *:nth-child(2) { transition-delay: 80ms; }
+.reveal-stagger.is-visible > *:nth-child(3) { transition-delay: 160ms; }
+.reveal-stagger.is-visible > *:nth-child(4) { transition-delay: 240ms; }
+.reveal-stagger.is-visible > *:nth-child(5) { transition-delay: 320ms; }
+.reveal-stagger.is-visible > *:nth-child(6) { transition-delay: 400ms; }
+.reveal-stagger.is-visible > *:nth-child(7) { transition-delay: 480ms; }
+.reveal-stagger.is-visible > *:nth-child(8) { transition-delay: 560ms; }
+
+/* ═══ JS-enabled: hide reveal elements until triggered ═══ */
+.js .reveal:not(.is-visible) {
+  opacity: 0;
+  transform: translateY(30px);
+}
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+.js .reveal-stagger:not(.is-visible) > * {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.js .reveal-stagger.is-visible > * {
+  opacity: 1;
+  transform: none;
+}
+
+/* ═══ Scroll indicator bounce ═════════════════ */
+.hero__scroll {
+  animation: scroll-hint 2s var(--ease-in-out) infinite;
+}
+@keyframes scroll-hint {
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50% { transform: translateY(8px); opacity: 1; }
+}
+
+/* ═══ Mobile ══════════════════════════════════ */
+@media (max-width: 48rem) {
+  .hero { min-height: 80vh; }
+  .hero__display { font-size: var(--text-display-s); }
+  .project__head { flex-direction: column; gap: var(--space-2xs); }
+  .award { flex-direction: column; gap: var(--space-2xs); }
+}
+
+@media (max-width: 25rem) {
+  :root { --page-gutter: 1.25rem; }
+  .hero__display { font-size: 2.25rem; }
+  .section__title { font-size: var(--text-xl); }
+  .skills { gap: var(--space-2xs) var(--space-sm); }
+}
+</style>
+</head>
+<body>
+
+<canvas id="particle-canvas" aria-hidden="true"></canvas>
+<script>
+  // Add .js class to enable reveal animations only when JS is running
+  document.documentElement.classList.add('js');
+</script>
+
+<div class="wrap">
+
+<!-- ═══ Hero ═══════════════════════════════════ -->
+<section class="hero" id="top">
+  <div class="reveal-stagger">
+    <p class="hero__label">Ho Chi Minh City · 2026</p>
+    <h1 class="hero__display">Nguyen Viet Hoang</h1>
+    <p class="hero__sub">AI Engineer</p>
+    <p class="hero__lede">
+      AI Engineer specializing in NLP, embeddings, and retrieval-augmented
+      systems. Building agentic AI, multi-agent workflows, and information
+      retrieval pipelines on async Python and FastAPI.
+    </p>
+  </div>
+  <p class="hero__scroll">Scroll ↓</p>
+</section>
+
+<!-- ═══ About ══════════════════════════════════ -->
+<section class="section reveal" id="about">
+  <p class="section__label">About</p>
+  <h2 class="section__title">Engineer, not tourist.</h2>
+  <div class="section__body">
+    <p>
+      I build AI systems that ship — agentic text-to-SQL assistants,
+      computer vision pipelines for aquaculture, document OCR solutions,
+      and multi-agent workflows with LangGraph. My work lives at the
+      intersection of NLP, information retrieval, and production ML.
+    </p>
+    <p>
+      Core stack: NLP and embeddings, RAG with guardrails, agentic AI
+      via LangGraph, backend on FastAPI and Supabase/pgvector, workflow
+      automation with n8n. I prefer open-source and document everything.
+    </p>
+  </div>
+</section>
+
+<!-- ═══ Skills ═════════════════════════════════ -->
+<section class="section reveal" id="skills">
+  <p class="section__label">Stack</p>
+  <h2 class="section__title">Tools I reach for.</h2>
+  <div class="skills reveal-stagger">
+    <span class="skill-tag">Python</span>
+    <span class="skill-tag">FastAPI</span>
+    <span class="skill-tag">LangGraph</span>
+    <span class="skill-tag">RAG</span>
+    <span class="skill-tag">NLP</span>
+    <span class="skill-tag">Embeddings</span>
+    <span class="skill-tag">pgvector</span>
+    <span class="skill-tag">Supabase</span>
+    <span class="skill-tag">YOLO</span>
+    <span class="skill-tag">CLIP</span>
+    <span class="skill-tag">FAISS</span>
+    <span class="skill-tag">DeepSeek</span>
+    <span class="skill-tag">Claude Code</span>
+    <span class="skill-tag">n8n</span>
+    <span class="skill-tag">Docker</span>
+    <span class="skill-tag">Azure</span>
+    <span class="skill-tag">GitHub Actions</span>
+    <span class="skill-tag">MCP Protocol</span>
+  </div>
+</section>
+
+<!-- ═══ Experience ═════════════════════════════ -->
+<section class="section reveal" id="experience">
+  <p class="section__label">Experience</p>
+  <h2 class="section__title">Where I've worked.</h2>
+  <div class="timeline reveal-stagger">
+    <div class="timeline__item">
+      <span class="timeline__year">03/2026 — Present</span>
+      <h3 class="timeline__role">Founding Engineer</h3>
+      <span class="timeline__company">Independent Startup · Remote</span>
+      <ul class="timeline__highlights">
+        <li>Built document OCR solution for external company, digitizing paperwork-based workflows into structured data.</li>
+        <li>Led technical build end-to-end using CLI-based agentic tools like Claude Code to accelerate delivery.</li>
+      </ul>
+    </div>
+    <div class="timeline__item">
+      <span class="timeline__year">08/2025 — 05/2026</span>
+      <h3 class="timeline__role">AI Engineer</h3>
+      <span class="timeline__company">Mebisoft · Ho Chi Minh City</span>
+      <ul class="timeline__highlights">
+        <li>Agentic Text-to-SQL Assistant (RAG + Guardrails): chatbot letting farmers query a 62-table database in Vietnamese — >90% accuracy.</li>
+        <li>Performance Optimization: reduced inference latency from 8s to 1.5s per image (81% improvement), handling 2,000+ daily requests.</li>
+        <li>Shrimp Disease Diagnosis via Image Analysis: classification system detecting common shrimp diseases — >95% accuracy.</li>
+        <li>Automated Shrimp Length Measurement: CV system (YOLO/RTMDet) detecting and measuring shrimp length — >95% accuracy.</li>
+        <li>CI/CD and Monitoring: GitHub Actions for automated testing/deployment to Azure; Azure Monitor + Application Insights — >99% uptime.</li>
+      </ul>
+    </div>
+    <div class="timeline__item">
+      <span class="timeline__year">01/2025 — 06/2025</span>
+      <h3 class="timeline__role">AI Engineer Intern</h3>
+      <span class="timeline__company">ThinkWare AI Solutions</span>
+      <ul class="timeline__highlights">
+        <li>RAG and Agent Evaluation: designed evaluation pipelines (Hit Rate, MRR) improving response accuracy by 25%.</li>
+        <li>Data Curation: curated instruction-tuning datasets, boosting tool-calling reliability by 20%.</li>
+        <li>Annotation: labeled 10,000+ objects for autonomous driving with high precision.</li>
+        <li>Automation: built Python scripts reducing manual effort by 40%.</li>
+      </ul>
+    </div>
+    <div class="timeline__item">
+      <span class="timeline__year">08/2024 — 12/2024</span>
+      <h3 class="timeline__role">Python Instructor</h3>
+      <span class="timeline__company">Freelance · Ho Chi Minh City</span>
+      <ul class="timeline__highlights">
+        <li>Taught Python to 10+ high school students.</li>
+        <li>Built web scraping automation pipeline reducing manual effort by 40%.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Projects ═══════════════════════════════ -->
+<section class="section reveal" id="work">
+  <p class="section__label">Work</p>
+  <h2 class="section__title">Selected projects.</h2>
+  <div class="projects reveal-stagger">
+    <div class="project">
+      <div class="project__head">
+        <h3 class="project__name">VietStoryLens</h3>
+        <span class="project__year">2026</span>
+      </div>
+      <p class="project__desc">
+        AI landmark recognition and storytelling app. Recognizes 15 HCMC
+        landmarks from photos via CLIP + FAISS (85–93% accuracy) through a
+        LangGraph Router-Verifier RAG pipeline with zero hallucination.
+        Demoed to NVIDIA's Software Director at LotusHacks x HackHarvard.
+      </p>
+      <div class="project__stack">
+        <span>CLIP</span><span>FAISS</span><span>LangGraph</span><span>DeepSeek V4</span><span>FastAPI</span><span>Docker</span><span>MCP</span>
+      </div>
+    </div>
+    <div class="project">
+      <div class="project__head">
+        <h3 class="project__name">Slack AI Assistant</h3>
+        <span class="project__year">2025</span>
+      </div>
+      <p class="project__desc">
+        RAG bot with hybrid retrieval, tool-calling, and thread-aware
+        memory. Answers team questions in Slack using Supabase pgvector
+        for semantic search.
+      </p>
+      <div class="project__stack">
+        <span>n8n</span><span>Supabase</span><span>pgvector</span><span>RAG</span>
+      </div>
+    </div>
+    <div class="project">
+      <div class="project__head">
+        <h3 class="project__name">Fungi Detection System</h3>
+        <span class="project__year">2025</span>
+      </div>
+      <p class="project__desc">
+        Hybrid ConvNeXt + Transformer model achieving 97.7% accuracy in
+        fungal species classification. Led a 4-member team at Olympic AI
+        HCMC Competition. Automated end-to-end pipeline: ingestion,
+        cleaning, augmentation, preprocessing.
+      </p>
+      <div class="project__stack">
+        <span>ConvNeXt</span><span>Transformer</span><span>Python</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Awards ═════════════════════════════════ -->
+<section class="section reveal" id="awards">
+  <p class="section__label">Honors</p>
+  <h2 class="section__title">Recognition.</h2>
+  <div class="awards reveal-stagger">
+    <div class="award">
+      <span class="award__title">4th Place — Olympic AI HCMC Competition</span>
+      <span class="award__meta">2025</span>
+    </div>
+    <div class="award">
+      <span class="award__title">Champion — PieoneDream Hackathon AI x Blockchain</span>
+      <span class="award__meta">2024</span>
+    </div>
+    <div class="award">
+      <span class="award__title">Contributor — Hermes Desktop (13.2k ★)</span>
+      <span class="award__meta">2025</span>
+    </div>
+    <div class="award">
+      <span class="award__title">Outstanding Graduate of the Class of 2023</span>
+      <span class="award__meta">2023</span>
+    </div>
+    <div class="award">
+      <span class="award__title">Consolation Prize — School IQ Math Competition</span>
+      <span class="award__meta">2022</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Education + Certs ══════════════════════ -->
+<section class="section reveal" id="education">
+  <p class="section__label">Education</p>
+  <h2 class="section__title">Background.</h2>
+  <div class="education">
+    <div class="education__item">
+      <p class="education__degree">Bachelor of Machine Learning</p>
+      <p class="education__school">HCMC University of Technology · 2022 — 2026</p>
+    </div>
+  </div>
+  <div class="cert-list reveal-stagger">
+    <span class="cert">Google AI Essentials</span>
+    <span class="cert">Google Data Analytics</span>
+    <span class="cert">Stanford ML Specialization</span>
+    <span class="cert">Stanford AI in Healthcare</span>
+    <span class="cert">IBM AI Engineering</span>
+  </div>
+</section>
+
+<!-- ═══ Contact ═════════════════════════════════ -->
+<section class="contact reveal" id="contact">
+  <p class="section__label">Contact</p>
+  <h2 class="section__title">Let's talk.</h2>
+  <p class="section__body">
+    Open to AI engineering roles, freelance projects, and technical
+    collaborations. Fastest response via email.
+  </p>
+  <button class="cv-download" id="cv-btn" type="button">
+    <span>Download CV</span>
+    <span class="cv-download__arrow" aria-hidden="true">↓</span>
+  </button>
+  <div class="contact__links">
+    <a href="mailto:ngviethoang.work@gmail.com" class="contact__link">Email</a>
+    <a href="tel:+84383700402" class="contact__link">Phone</a>
+    <a href="https://github.com/jamesng16" class="contact__link">GitHub</a>
+    <a href="https://ko-fi.com/jamesnguyenx" class="contact__link">Ko-fi</a>
+    <a href="https://wa.me/84383700402" class="contact__link">WhatsApp</a>
+  </div>
+</section>
+
+<!-- ═══ Footer ══════════════════════════════════ -->
+<footer class="foot">
+  <p class="foot__sentence">
+    Built with Python, TypeScript, and curiosity.
+  </p>
+  <p class="foot__meta">
+    Nguyen Viet Hoang · 2026 · Ho Chi Minh City, Vietnam
+  </p>
+</footer>
+
+</div>
+
+<script>
+  // ═══ Particle Network Animation ═══════════════
+  const canvas = document.getElementById('particle-canvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  let animationId = null;
+  const PARTICLE_COUNT_DESKTOP = 80;
+  const PARTICLE_COUNT_MOBILE = 35;
+  const MAX_DISTANCE = 140;
+  const SPEED = 0.15;
+
+  function getParticleCount() {
+    return window.innerWidth < 768 ? PARTICLE_COUNT_MOBILE : PARTICLE_COUNT_DESKTOP;
+  }
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  function createParticle() {
+    return {
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * SPEED,
+      vy: (Math.random() - 0.5) * SPEED,
+      radius: Math.random() * 1.5 + 0.5,
+      blink: 0,
+      blinkTimer: Math.random() * 300 + 100,
+      blinkCounter: 0,
+    };
+  }
+
+  function initParticles() {
+    particles = [];
+    const count = getParticleCount();
+    for (let i = 0; i < count; i++) {
+      particles.push(createParticle());
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+
+      // Wrap around edges
+      if (p.x < 0) p.x = canvas.width;
+      if (p.x > canvas.width) p.x = 0;
+      if (p.y < 0) p.y = canvas.height;
+      if (p.y > canvas.height) p.y = 0;
+
+      // Blink logic — occasional signal flash
+      p.blinkCounter++;
+      if (p.blinkCounter > p.blinkTimer) {
+        p.blink = 1;
+        p.blinkCounter = 0;
+        p.blinkTimer = Math.random() * 400 + 200;
+      }
+      if (p.blink > 0) {
+        p.blink -= 0.02;
+      }
+
+      const baseOpacity = 0.4;
+      const blinkOpacity = p.blink > 0 ? p.blink * 0.6 : 0;
+      const finalOpacity = baseOpacity + blinkOpacity;
+
+      // Draw particle
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius + (p.blink > 0 ? p.blink * 2 : 0), 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(200, 160, 100, ${finalOpacity})`;
+      ctx.fill();
+
+      // Draw connections
+      for (let j = i + 1; j < particles.length; j++) {
+        const p2 = particles[j];
+        const dx = p.x - p2.x;
+        const dy = p.y - p2.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < MAX_DISTANCE) {
+          const lineOpacity = (1 - dist / MAX_DISTANCE) * 0.25;
+          // Boost line if either particle is blinking
+          const blinkBoost = Math.max(p.blink, p2.blink) * 0.3;
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.strokeStyle = `rgba(200, 160, 100, ${lineOpacity + blinkBoost})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+
+    animationId = requestAnimationFrame(animate);
+  }
+
+  // Check reduced motion preference
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!prefersReducedMotion) {
+    resizeCanvas();
+    initParticles();
+    animate();
+
+    // Handle resize
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        resizeCanvas();
+        initParticles();
+      }, 200);
+    });
+  }
+
+  // ═══ CV download ═════════════════════════════
+  document.getElementById('cv-btn').addEventListener('click', () => {
+    const link = document.createElement('a');
+    link.href = '/NguyenVietHoang-CV.pdf';
+    link.download = 'NguyenVietHoang-CV.pdf';
+    link.click();
+  });
+
+  // ═══ Smooth scroll hint ═════════════════════
+  document.querySelector('.hero__scroll')?.addEventListener('click', () => {
+    document.querySelector('#about')?.scrollIntoView({ behavior: 'smooth' });
+  });
+
+  // ═══ Scroll reveal — IntersectionObserver ═══
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.15,
+    rootMargin: '0px 0px -10% 0px'
+  });
+
+  document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => {
+    observer.observe(el);
+  });
+
+  // Trigger hero animation on load
+  window.addEventListener('load', () => {
+    const hero = document.querySelector('.hero .reveal-stagger');
+    if (hero) hero.classList.add('is-visible');
+  });
+</script>
+
+</body>
+</html>
