@@ -657,7 +657,32 @@ body::before {
   font-weight: 500;
   font-size: var(--text-lg);
   color: var(--color-ink);
-  margin-top: 0.25rem;
+  margin-top: 0.35rem;
+}
+
+.project__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-outlier);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--color-accent);
+  background: var(--color-paper);
+  border: var(--rule-hair) solid var(--color-rule-strong);
+  padding: 0.32rem 0.75rem;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all var(--dur-micro) var(--ease-out);
+}
+
+.project__link:hover {
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+  border-color: var(--color-accent);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-xs);
 }
 
 .project__subtitle {
@@ -1277,6 +1302,10 @@ body::before {
               </div>
               <h3 class="project__name">VietStoryLens — AI Landmark Recognition &amp; Storytelling</h3>
             </div>
+            <a class="project__link" href="https://github.com/jamesng16/VietStoryLens" target="_blank" rel="noopener noreferrer">
+              <span>GitHub Repo</span>
+              <span aria-hidden="true">↗</span>
+            </a>
           </div>
           <p class="project__desc">
             End-to-end multimodal application recognizing <strong>15 Ho Chi Minh City landmarks</strong> from photos using <strong>CLIP ViT-L/14 + FAISS (85–93% accuracy)</strong>. Powered by a <strong>LangGraph Router-Verifier agent pipeline</strong> that generates grounded, zero-hallucination Vietnamese cultural narratives, served via a containerized FastAPI/Docker backend and Flutter mobile frontend. Demoed directly to NVIDIA's Software Director.
@@ -1336,6 +1365,10 @@ body::before {
               </div>
               <h3 class="project__name">VNM-OCR — Vietnamese Document OCR</h3>
             </div>
+            <a class="project__link" href="https://github.com/jamesng16/VNM-OCR" target="_blank" rel="noopener noreferrer">
+              <span>GitHub Repo</span>
+              <span aria-hidden="true">↗</span>
+            </a>
           </div>
           <p class="project__desc">
             Production-ready OCR stack built on <strong>DeepDoc and VietOCR (ONNX)</strong> for accurate Vietnamese text recognition across scanned images and PDFs. Integrates <strong>YOLOv10 layout analysis and table structure recognition</strong> alongside a FastAPI service and interactive web UI for visual inspection.
@@ -1387,6 +1420,10 @@ body::before {
               </div>
               <h3 class="project__name">Hermes Desktop — Open-Source Contributor</h3>
             </div>
+            <a class="project__link" href="https://github.com/fathah/hermes-desktop/pull/833" target="_blank" rel="noopener noreferrer">
+              <span>View PR #833</span>
+              <span aria-hidden="true">↗</span>
+            </a>
           </div>
           <p class="project__desc">
             Resolved GitHub API rate-limit failures in the Discover workflow by engineering <strong>optional personal token authentication</strong> and extending tree-cache TTL to <strong>60 minutes</strong>, ensuring resilient browsing for desktop users.
