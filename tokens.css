@@ -1,78 +1,113 @@
-/* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V5 */
-/* Hallmark · genre: atmospheric · macrostructure: Portfolio Grid · theme: custom (warm-dark)
- * tone: atmospheric · anchor hue: 40 (warm amber) · enrichment: none · nav: hidden · footer: Ft5
- * paper: oklch(12% 0.008 40) · accent: oklch(62% 0.13 50) · display: Fraunces + body: Newsreader
- * axes: dark / high-contrast-serif / warm
- * contrast: pass (40–41) · nav: hidden · footer: Ft5 · slop: pass (42–45)
- * honest: pass (46) · chrome: pass (47) · tokens: pass (48) · responsive: pass (49)
- * mobile: pass (34, 49, 50–57) · icons: pass (30)
- */
+/* ═══════════════════════════════════════════════════════════════
+   COZY WARM EDITORIAL TOKENS
+   Default: Warm Paper & Latte (Cozy Daylight)
+   Optional [data-theme="dark"]: Cozy Evening Lamp (Warm Coffee)
+   ═══════════════════════════════════════════════════════════════ */
 
 :root {
-  /* ── Colour (dark warm atmospheric) ── */
-  --color-paper:    oklch(12%  0.008  40);
-  --color-paper-2:  oklch(16%  0.010  40);
-  --color-paper-3:  oklch(20%  0.012  40);
-  --color-rule:     oklch(28%  0.008  40);
-  --color-neutral:  oklch(62%  0.008  40);
-  --color-muted:    oklch(72%  0.006  40);
-  --color-ink:      oklch(94%  0.006  80);
-  --color-accent:   oklch(68%  0.14  50);
-  --color-accent-ink: oklch(12% 0.008  40);
-  --color-focus:    oklch(75%  0.16  50);
+  /* ── Colour (Cozy Daylight — Warm Paper, Espresso Ink, Terracotta & Sage) ── */
+  --color-paper:        #FAF6F0;
+  --color-paper-2:      #F3ECE2;
+  --color-paper-3:      #EAE0D2;
+  --color-card:         rgba(255, 252, 247, 0.86);
+  --color-card-hover:   #FFFFFF;
+  --color-nav-bg:       rgba(250, 246, 240, 0.84);
+  --color-rule:         rgba(110, 86, 65, 0.14);
+  --color-rule-strong:  rgba(110, 86, 65, 0.24);
+  --color-ink:          #2A231D;
+  --color-neutral:      #4D4238;
+  --color-muted:        #7A6C5D;
+  --color-accent:       #C06038;
+  --color-accent-hover: #A64D29;
+  --color-accent-soft:  rgba(192, 96, 56, 0.11);
+  --color-accent-ink:   #FFFDF9;
+  --color-sage:         #4A7856;
+  --color-sage-soft:    rgba(74, 120, 86, 0.12);
+  --color-amber-soft:   rgba(217, 155, 67, 0.16);
+  --color-focus:        #C06038;
+  --particle-rgb:       175, 118, 78;
+
+  /* ── Shadows & Radii ── */
+  --shadow-xs:  0 2px 6px rgba(60, 42, 24, 0.04);
+  --shadow-sm:  0 6px 20px -4px rgba(60, 42, 24, 0.06), 0 2px 6px -1px rgba(60, 42, 24, 0.03);
+  --shadow-md:  0 14px 34px -6px rgba(60, 42, 24, 0.09), 0 4px 12px -2px rgba(60, 42, 24, 0.04);
+  --radius-sm:  10px;
+  --radius-md:  16px;
+  --radius-lg:  24px;
+  --radius-pill: 9999px;
 
   /* ── Typography ── */
   --font-display: "Fraunces", Georgia, "Times New Roman", serif;
-  --font-body:    "Newsreader", Georgia, "Times New Roman", serif;
-  --font-name:    "Space Grotesk", "Inter", system-ui, sans-serif;
+  --font-body:    "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-name:    "Fraunces", Georgia, serif;
   --font-outlier: "JetBrains Mono", ui-monospace, monospace;
 
-  --text-xs:   0.64rem;
-  --text-sm:   0.8rem;
-  --text-base: 1rem;
-  --text-md:   1.25rem;
-  --text-lg:   1.5625rem;
-  --text-xl:   1.9531rem;
-  --text-2xl:  2.4414rem;
-  --text-3xl:  3.0518rem;
-  --text-4xl:  3.8147rem;
-  --text-display: clamp(2.75rem, 6vw + 1rem, 6rem);
-  --text-display-s: clamp(2rem, 4vw + 0.5rem, 3.5rem);
+  --text-xs:   0.775rem;
+  --text-sm:   0.9rem;
+  --text-base: 1.025rem;
+  --text-md:   1.125rem;
+  --text-lg:   1.325rem;
+  --text-xl:   1.65rem;
+  --text-2xl:  2.1rem;
+  --text-3xl:  2.75rem;
+  --text-display: clamp(2.35rem, 4.5vw + 1rem, 3.85rem);
+  --text-display-s: clamp(1.9rem, 4vw + 0.5rem, 2.75rem);
 
-  /* ── Spacing (4pt scale) ── */
+  /* ── Spacing ── */
   --space-3xs: 0.125rem;
   --space-2xs: 0.25rem;
   --space-xs:  0.5rem;
   --space-sm:  0.75rem;
   --space-md:  1rem;
   --space-lg:  1.5rem;
-  --space-xl:  2.5rem;
-  --space-2xl: 4rem;
-  --space-3xl: 6rem;
-  --space-4xl: 9rem;
+  --space-xl:  2.25rem;
+  --space-2xl: 3.5rem;
+  --space-3xl: 5rem;
+  --space-4xl: 7rem;
 
   /* ── Motion ── */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in:  cubic-bezier(0.7, 0, 0.84, 0);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-  --dur-micro: 120ms;
-  --dur-short: 220ms;
-  --dur-long:  420ms;
+  --dur-micro: 140ms;
+  --dur-short: 240ms;
+  --dur-long:  460ms;
 
-  /* ── Rules ── */
+  /* ── Rules & Layout ── */
   --rule-hair: 1px;
+  --page-gutter: clamp(1.25rem, 4vw, 3.5rem);
+  --measure: 66ch;
 
   /* ── Z-scale ── */
   --z-base: 1;
   --z-raised: 10;
-  --z-dropdown: 100;
-  --z-sticky: 200;
   --z-sticky-nav: 300;
-  --z-modal: 400;
-  --z-toast: 500;
-  --z-tooltip: 600;
+}
 
-  /* ── Page ── */
-  --page-gutter: clamp(1.5rem, 5vw, 5rem);
-  --measure: 65ch;
+/* ── Cozy Evening Lamp Theme (Warm Dark Mode) ── */
+[data-theme="dark"] {
+  --color-paper:        #1C1815;
+  --color-paper-2:      #25201C;
+  --color-paper-3:      #302924;
+  --color-card:         rgba(38, 32, 28, 0.84);
+  --color-card-hover:   #2D2621;
+  --color-nav-bg:       rgba(28, 24, 21, 0.84);
+  --color-rule:         rgba(235, 215, 195, 0.11);
+  --color-rule-strong:  rgba(235, 215, 195, 0.22);
+  --color-ink:          #F4ECE1;
+  --color-neutral:      #D5C7B8;
+  --color-muted:        #9E8F80;
+  --color-accent:       #E2875A;
+  --color-accent-hover: #EE9B70;
+  --color-accent-soft:  rgba(226, 135, 90, 0.14);
+  --color-accent-ink:   #1C1815;
+  --color-sage:         #7BB088;
+  --color-sage-soft:    rgba(123, 176, 136, 0.15);
+  --color-amber-soft:   rgba(226, 168, 86, 0.15);
+  --color-focus:        #E2875A;
+  --particle-rgb:       218, 162, 112;
+
+  --shadow-xs:  0 2px 8px rgba(0, 0, 0, 0.22);
+  --shadow-sm:  0 8px 24px -4px rgba(0, 0, 0, 0.32);
+  --shadow-md:  0 16px 38px -6px rgba(0, 0, 0, 0.45);
 }
