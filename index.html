@@ -692,6 +692,91 @@ body::before {
   border: var(--rule-hair) solid var(--color-rule);
 }
 
+/* ═══ Cozy Architecture Pipeline Diagrams ═════════ */
+.arch-diagram {
+  margin-top: var(--space-md);
+  padding: 0.95rem 1.1rem;
+  background: var(--color-paper);
+  border: var(--rule-hair) dashed var(--color-rule-strong);
+  border-radius: var(--radius-sm);
+}
+
+.arch-diagram__label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-outlier);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+  margin-bottom: 0.65rem;
+}
+
+.arch-flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.arch-node {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 0.42rem 0.7rem;
+  background: var(--color-card);
+  border: var(--rule-hair) solid var(--color-rule-strong);
+  border-radius: 8px;
+  box-shadow: var(--shadow-xs);
+  min-width: 110px;
+  flex: 1 1 auto;
+}
+
+.arch-node--accent {
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
+}
+
+.arch-node--sage {
+  border-color: var(--color-sage);
+  background: var(--color-sage-soft);
+}
+
+.arch-node__step {
+  font-family: var(--font-outlier);
+  font-size: 0.65rem;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.arch-node--sage .arch-node__step {
+  color: var(--color-sage);
+}
+
+.arch-node__title {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.78rem;
+  color: var(--color-ink);
+  margin-top: 0.1rem;
+}
+
+.arch-node__meta {
+  font-family: var(--font-outlier);
+  font-size: 0.68rem;
+  color: var(--color-muted);
+  margin-top: 0.05rem;
+}
+
+.arch-arrow {
+  font-family: var(--font-outlier);
+  font-size: 0.85rem;
+  color: var(--color-accent);
+  padding: 0 0.1rem;
+  user-select: none;
+}
+
 /* ═══ Honors & Education Split Layout ═════════════ */
 .bento-split {
   display: grid;
@@ -973,8 +1058,11 @@ body::before {
         <a class="btn btn--secondary" href="#work">
           <span>Explore Projects</span>
         </a>
-        <a class="btn btn--ghost" href="mailto:ngviethoang.work@gmail.com">
-          <span>ngviethoang.work@gmail.com</span>
+        <a class="btn btn--ghost" href="https://www.linkedin.com/in/jamesnguyen106" target="_blank" rel="noopener noreferrer">
+          <span>in LinkedIn</span>
+        </a>
+        <a class="btn btn--ghost" href="https://github.com/jamesng16" target="_blank" rel="noopener noreferrer">
+          <span>⌘ GitHub</span>
         </a>
       </div>
 
@@ -1193,6 +1281,39 @@ body::before {
           <p class="project__desc">
             End-to-end multimodal application recognizing <strong>15 Ho Chi Minh City landmarks</strong> from photos using <strong>CLIP ViT-L/14 + FAISS (85–93% accuracy)</strong>. Powered by a <strong>LangGraph Router-Verifier agent pipeline</strong> that generates grounded, zero-hallucination Vietnamese cultural narratives, served via a containerized FastAPI/Docker backend and Flutter mobile frontend. Demoed directly to NVIDIA's Software Director.
           </p>
+
+          <!-- Architecture Pipeline Diagram -->
+          <div class="arch-diagram" aria-label="VietStoryLens System Architecture">
+            <div class="arch-diagram__label">
+              <span>System Architecture Pipeline</span>
+              <span>Zero-Hallucination Multimodal RAG</span>
+            </div>
+            <div class="arch-flow">
+              <div class="arch-node">
+                <span class="arch-node__step">01 · Input</span>
+                <span class="arch-node__title">Flutter App</span>
+                <span class="arch-node__meta">Photo / Query</span>
+              </div>
+              <span class="arch-arrow" aria-hidden="true">→</span>
+              <div class="arch-node arch-node--accent">
+                <span class="arch-node__step">02 · Vision Index</span>
+                <span class="arch-node__title">CLIP ViT-L/14 + FAISS</span>
+                <span class="arch-node__meta">85–93% Landmark Match</span>
+              </div>
+              <span class="arch-arrow" aria-hidden="true">→</span>
+              <div class="arch-node arch-node--accent">
+                <span class="arch-node__step">03 · Agent Graph</span>
+                <span class="arch-node__title">LangGraph Router</span>
+                <span class="arch-node__meta">Context &amp; Guardrail Verifier</span>
+              </div>
+              <span class="arch-arrow" aria-hidden="true">→</span>
+              <div class="arch-node arch-node--sage">
+                <span class="arch-node__step">04 · Serving</span>
+                <span class="arch-node__title">FastAPI + Docker</span>
+                <span class="arch-node__meta">Grounded VN Story</span>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="project__stack">
           <span>CLIP ViT-L/14</span>
@@ -1219,6 +1340,33 @@ body::before {
           <p class="project__desc">
             Production-ready OCR stack built on <strong>DeepDoc and VietOCR (ONNX)</strong> for accurate Vietnamese text recognition across scanned images and PDFs. Integrates <strong>YOLOv10 layout analysis and table structure recognition</strong> alongside a FastAPI service and interactive web UI for visual inspection.
           </p>
+
+          <!-- OCR Architecture Pipeline Diagram -->
+          <div class="arch-diagram" aria-label="VNM-OCR Document Processing Pipeline">
+            <div class="arch-diagram__label">
+              <span>Document AI Pipeline</span>
+              <span>Layout &amp; Table Structure</span>
+            </div>
+            <div class="arch-flow">
+              <div class="arch-node">
+                <span class="arch-node__step">01 · Ingest</span>
+                <span class="arch-node__title">PDF / Scan</span>
+                <span class="arch-node__meta">DeepDoc Preproc</span>
+              </div>
+              <span class="arch-arrow" aria-hidden="true">→</span>
+              <div class="arch-node arch-node--accent">
+                <span class="arch-node__step">02 · Structure</span>
+                <span class="arch-node__title">YOLOv10</span>
+                <span class="arch-node__meta">Layout &amp; Table Cells</span>
+              </div>
+              <span class="arch-arrow" aria-hidden="true">→</span>
+              <div class="arch-node arch-node--sage">
+                <span class="arch-node__step">03 · Recognition</span>
+                <span class="arch-node__title">VietOCR (ONNX)</span>
+                <span class="arch-node__meta">Markdown &amp; Web UI</span>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="project__stack">
           <span>DeepDoc</span>
@@ -1396,6 +1544,9 @@ body::before {
         </a>
         <a href="tel:+84394601607" class="contact__link">
           <span>☎ 0394 601 607</span>
+        </a>
+        <a href="https://www.linkedin.com/in/jamesnguyen106" target="_blank" rel="noopener noreferrer" class="contact__link">
+          <span>in LinkedIn (jamesnguyen106)</span>
         </a>
         <a href="https://github.com/jamesng16" target="_blank" rel="noopener noreferrer" class="contact__link">
           <span>⌘ GitHub (@jamesng16)</span>
